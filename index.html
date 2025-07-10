@@ -335,6 +335,18 @@ function nextSlide() {
     }, 4000);
   }
 }
+  }
+
+  if (revealBtn && current === sections.length - 1) {
+    setTimeout(() => {
+      revealBtn.classList.add('show');
+      revealBtn.onclick = () => {
+        document.querySelector('.popup').classList.add('show');
+        triggerConfetti();
+      };
+    }, 4000);
+  }
+}
 
   
     }
@@ -371,15 +383,22 @@ function nextSlide() {
 }
 
 function prevSlide() {
+  const revealBtn = document.getElementById('revealBtn');
   if (current > 0) {
     sections[current].classList.remove('active');
     current--;
     sections[current].classList.add('active');
     flipSound.play();
-    const revealBtn = document.getElementById('revealBtn');
-    if (revealBtn && current === sections.length - 1) {
-      revealBtn.classList.add('show');
-    } else if (revealBtn) {
+
+    if (revealBtn) {
+      if (current === sections.length - 1) {
+        revealBtn.classList.add('show');
+      } else {
+        revealBtn.classList.remove('show');
+      }
+    }
+  }
+} else if (revealBtn) {
       revealBtn.classList.remove('show');
     }
     document.querySelector('.reveal-btn').classList.remove('show');
