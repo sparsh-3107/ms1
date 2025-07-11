@@ -3,219 +3,340 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Maya 💖</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Indie+Flower&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+  <title>Happy Birthday maya ❤️🧿🎉</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Great+Vibes&family=Gloria+Hallelujah&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg-light: #fffafc;
-      --text-light: #222;
-      --bg-dark: #0e0e1a;
-      --text-dark: #f7f7f7;
-    }
-    html {
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
       font-family: 'Poppins', sans-serif;
-      transition: background 0.5s, color 0.5s;
-    }
-    body {
-      margin: 0;
-      background: var(--bg-light);
-      color: var(--text-light);
-      overflow-x: hidden;
-      text-align: center;
-    }
-    .dark-mode body {
-      background: var(--bg-dark);
-      color: var(--text-dark);
+      background: linear-gradient(to right, #fff8f0, #ffe4e1);
+      color: #222;
+      position: relative;
+      transition: background 1s ease, color 1s ease;
     }
     h1 {
-      font-family: 'Pacifico', cursive;
-      font-size: 3em;
-      margin-top: 1rem;
+      font-size: 2.5em;
+      margin: 1.5rem auto 1rem;
+      font-family: 'Great Vibes', cursive;
+      text-align: center;
+      color: #ffb6c1;
+      animation: flicker 2.5s ease-in-out infinite alternate;
+    }
+    @keyframes flicker {
+      0% { opacity: 1; }
+      50% { opacity: 0.8; text-shadow: 0 0 25px #ff80ab; }
+      100% { opacity: 1; }
+    }
+    .slider {
+      display: flex;
+      flex-direction: column;
     }
     .section {
-      min-height: 100vh;
-      padding: 2rem;
+      width: 100vw;
+      height: 100vh;
       display: none;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-      transition: all 0.7s ease-in-out;
-      transform: rotateY(90deg);
-      backface-visibility: hidden;
+      justify-content: center;
+      flex-direction: column;
+      padding: 2rem;
+      position: relative;
+      background: rgba(255, 240, 245, 0.6);
+      backdrop-filter: blur(12px);
+      box-shadow: inset 0 0 40px #ffb6c1aa;
+      animation: pageTurn 1s ease;
     }
     .section.active {
       display: flex;
-      transform: rotateY(0);
+    }
+    @keyframes pageTurn {
+      from { transform: rotateY(-90deg); opacity: 0; }
+      to { transform: rotateY(0deg); opacity: 1; }
     }
     .fade-text {
+      font-size: 1.3em;
+      font-family: 'Gloria Hallelujah', cursive;
+      text-align: center;
       max-width: 90%;
-      font-size: 1.4em;
       line-height: 1.8em;
+      color: #6b2c2c;
+      animation: fadeInUp 2s ease forwards;
+      opacity: 0;
     }
-    .buttons {
+    .section.active .fade-text {
+      opacity: 1;
+    }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .hearts, .sparkles, .stars {
       position: fixed;
-      bottom: 1.5rem;
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 1;
     }
-    button {
-      padding: 0.7rem 1.5rem;
-      font-size: 1em;
-      border: none;
-      border-radius: 8px;
-      background: #ff80ab;
-      color: white;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    .heart, .sparkle, .star {
+      position: absolute;
+      animation: float 6s linear infinite;
+      font-size: 1.5rem;
+      opacity: 0.7;
     }
-    #revealBtn {
+    .sparkle { color: #fff59d; }
+    .star { color: #aaddff; }
+    @keyframes float {
+      from { transform: translateY(100vh); opacity: 1; }
+      to { transform: translateY(-10vh); opacity: 0; }
+    }
+    .reveal-btn {
       display: none;
+      position: absolute;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%) scale(0);
+      background: #ff80ab;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 1rem;
+      color: #6b2c2c;
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 25;
+      box-shadow: 0 0 18px #ff80ab;
+      animation: popIn 0.6s ease forwards, heartbeat 1.5s infinite;
+    }
+    .reveal-btn.show {
+      display: block;
+    }
+    .popup {
+      animation: glowIn 1.5s ease-out;
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-size: 1.2em;
-      background: #ff4081;
-      padding: 1rem 2rem;
-      border-radius: 50px;
-      animation: heartbeat 1.5s infinite;
-      z-index: 5;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 2rem;
+      border-radius: 1rem;
+      text-align: center;
+      color: #222;
+      max-width: 90vw;
+      z-index: 999;
+      display: none;
+      font-family: 'Great Vibes', cursive;
+      box-shadow: 0 0 30px #ff80ab;
+      backdrop-filter: blur(15px);
     }
-    #revealBtn.fixed-bottom {
-      top: auto;
-      bottom: 100px;
-      animation: none;
+    .popup.show { display: block; animation: fadeInUp 1s ease; }
+    .popup button {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: #ff80ab;
+      border: none;
+      color: #fff;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+    }
+    .next-btn {
+      position: fixed;
+      bottom: 2rem;
+      left: 1rem;
+      background: #80deea;
+      padding: 0.8rem 1.2rem;
+      border: none;
+      border-radius: 0.8rem;
+      color: #0f0f0f;
+      font-family: 'Poppins', sans-serif;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 25;
+      box-shadow: 0 0 12px #00bcd4;
+    }
+    .next-btn.right {
+      left: auto;
+      right: 1rem;
+    }
+    audio { display: none; }
+    @media (max-width: 768px) {
+      h1 { font-size: 2em; }
+      .fade-text { font-size: 1.05em; padding: 0 1rem; }
+      .popup { padding: 1.2rem; font-size: 1em; }
+      .section { padding: 1.5rem; }
+    }
+    @keyframes popIn {
+      0% { transform: translateX(-50%) scale(0); opacity: 0; }
+      80% { transform: translateX(-50%) scale(1.1); opacity: 1; }
+      100% { transform: translateX(-50%) scale(1); }
     }
     @keyframes heartbeat {
-      0% { transform: translate(-50%, -50%) scale(1); }
-      50% { transform: translate(-50%, -50%) scale(1.1); }
-      100% { transform: translate(-50%, -50%) scale(1); }
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
     }
-    .popup {
-      display: none;
-      position: fixed;
-      top: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #fff0f6;
-      padding: 2rem;
-      border-radius: 12px;
-      max-width: 90%;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-      z-index: 10;
-      font-family: 'Indie Flower', cursive;
+    @keyframes glowIn {
+      0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+      50% { transform: translate(-50%, -50%) scale(1.05); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
     }
-    .popup.show {
-      display: block;
+    .popup-sparkles {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+      overflow: hidden;
     }
     .popup-sparkle {
       position: absolute;
-      animation: float 3s linear;
-      pointer-events: none;
+      font-size: 1.5rem;
+      color: #fff59d;
+      opacity: 0.8;
+      animation: sparkleFloat 3s linear infinite;
     }
-    @keyframes float {
-      0% { opacity: 1; transform: translateY(0); }
-      100% { opacity: 0; transform: translateY(-100px); }
+    @keyframes sparkleFloat {
+      from { transform: translateY(100%); opacity: 1; }
+      to { transform: translateY(-10%) rotate(360deg); opacity: 0; }
     }
     .theme-toggle {
       position: fixed;
       top: 1rem;
       right: 1rem;
-      background: #ccc;
-      border: none;
+      background: #ff80ab;
+      color: white;
       padding: 0.5rem 1rem;
-      border-radius: 8px;
+      border: none;
+      border-radius: 0.5rem;
       cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      z-index: 1001;
     }
-    @media (max-width: 600px) {
-      h1 { font-size: 2em; }
-      .fade-text { font-size: 1.2em; }
+    .dark-mode body {
+      background: linear-gradient(to right, #1a1a2e, #0f0f1b);
+      color: #fff;
+    }
+    .dark-mode .section {
+      background: rgba(0, 0, 0, 0.4);
+      box-shadow: inset 0 0 40px #ff80ab33;
+    }
+    .dark-mode .fade-text {
+      color: #ffe4e1;
+    }
+    .dark-mode .popup {
+      background: rgba(20, 20, 30, 0.95);
+      color: #fff;
+    }
+    .dark-mode .reveal-btn {
+      background: #ff4081;
+    }
+    .dark-mode .next-btn {
+      background: #00acc1;
+      color: white;
+    }
+    .dark-mode .theme-toggle {
+      background: #333;
+      color: #fff;
     }
   </style>
 </head>
 <body>
   <button class="theme-toggle" onclick="toggleTheme()">🌗 Toggle Theme</button>
-  <h1>Happy Birthday, Maya 🎉</h1>
-
-  <div class="section active"><div class="fade-text">🌟 From the moment you entered my life, everything changed for the better. You’re a blessing, a light, my sweetest love. 💖</div></div>
-  <div class="section"><div class="fade-text">🌸 Your laugh is music, your eyes hold stars, and your soul radiates kindness. You're the definition of beautiful. 💫</div></div>
-  <div class="section"><div class="fade-text">💌 Every day with you is a precious page in our story. I’m forever grateful for your love and presence. 🥺</div></div>
-  <div class="section"><div class="fade-text">🎶 You’re the melody to my heart. I could spend forever just admiring how magical you are. ❤️</div></div>
-  <div class="section"><div class="fade-text">🦋 On your birthday, I just want you to know: You mean everything to me. Forever yours, always. 🌷</div></div>
-
-  <button id="revealBtn">💌 Reveal Love Letter</button>
-  <div class="popup">
-    <h2>To My Sweetest Maya 💖</h2>
-    <p>You are my universe, my reason, my everything. Thank you for being the sunshine to my soul. I promise to cherish, protect, and love you every day of my life. 🥰</p>
-    <div id="popupSparkles"></div>
-  </div>
-
-  <div class="buttons">
-    <button onclick="prevSlide()">⬅️ Prev</button>
-    <button onclick="nextSlide()">➡️ Next</button>
-  </div>
-
-  <audio id="flipSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_d49332ac74.mp3" preload="auto"></audio>
   <audio autoplay loop>
     <source src="https://cdn.pixabay.com/download/audio/2023/03/06/audio_f2119a6a1c.mp3" type="audio/mpeg">
   </audio>
+  <audio id="flipSound">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/30/audio_e2bd84659d.mp3" type="audio/mpeg">
+  </audio>
+  <h1>Happy Birthday maya 🎉</h1>
+  <div class="slider" id="slider">
+    <div class="section active"><div class="fade-text">🎂 On this special day, the universe pauses to celebrate you. Your existence adds meaning to mine, like stars lighting up the darkest sky. 💫</div></div>
+    <div class="section"><div class="fade-text">🌌 You're not just beautiful on the outside, but breathtaking within. Today, we celebrate all that you are. 💖</div></div>
+    <div class="section"><div class="fade-text">🌠 My world began spinning in color the day you walked into it. You’re not a part of my life — you are my life. 🥺</div></div>
+    <div class="section"><div class="fade-text">🎶 Your laughter is the rhythm I live for. If I could, I’d write your name on every heartbeat. ❤️</div></div>
+    <div class="section"><div class="fade-text">🦋 You are grace wrapped in stardust. I fall for you every single day. 🌷</div></div>
+    <div class="section">
+      <div class="fade-text">With all my heart and soul, forever yours,<br><strong>sparsh</strong> 💌</div>
+      <button class="reveal-btn" id="revealBtn">💌 Reveal Love Letter 💌</button>
+    </div>
+  </div>
+
+  <div class="popup">
+    <div class="popup-sparkles" id="popupSparkles"></div>
+    <p>Dear maya,<br><br>Your love is the light in my world. I am endlessly thankful for your presence. Every second with you is magic, and I promise to love you beyond limits. 💖<br><br>Love,<br>sparsh 💌</p>
+    <button onclick="document.querySelector('.popup').classList.remove('show')">Close</button>
+  </div>
+
+  <button class="next-btn" onclick="prevSlide()">⬅️ Prev</button>
+  <button class="next-btn right" onclick="nextSlide()">Next ➡️</button>
 
   <div class="hearts" id="hearts"></div>
   <div class="sparkles" id="sparkles"></div>
   <div class="stars" id="stars"></div>
 
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
   <script>
     const sections = document.querySelectorAll('.section');
     const flipSound = document.getElementById('flipSound');
     const revealBtn = document.getElementById('revealBtn');
     let current = 0;
-    let revealedOnce = false;
+
+    function updateSectionVisibility() {
+      sections.forEach((section, index) => {
+        section.classList.toggle('active', index === current);
+      });
+      if (current === sections.length - 1) {
+        setTimeout(() => {
+          revealBtn.classList.add('show');
+        }, 3000);
+      } else {
+        revealBtn.classList.remove('show');
+      }
+    }
 
     function nextSlide() {
       if (current < sections.length - 1) {
-        sections[current].classList.remove('active');
         current++;
-        sections[current].classList.add('active');
+        updateSectionVisibility();
         flipSound.play();
-        if (current === sections.length - 1 && !revealedOnce) {
-          setTimeout(() => revealBtn.classList.add('show'), 4000);
-        }
       }
     }
 
     function prevSlide() {
       if (current > 0) {
-        sections[current].classList.remove('active');
         current--;
-        sections[current].classList.add('active');
+        updateSectionVisibility();
         flipSound.play();
-        revealBtn.classList.remove('show');
       }
     }
 
-    revealBtn.addEventListener('click', () => {
-      const popup = document.querySelector('.popup');
-      popup.classList.add('show');
+    revealBtn.onclick = () => {
+      document.querySelector('.popup').classList.add('show');
       triggerConfetti();
-      revealBtn.classList.remove('show');
-      revealBtn.classList.add('fixed-bottom');
-      revealedOnce = true;
-    });
+    };
 
-    function toggleTheme() {
-      document.documentElement.classList.toggle('dark-mode');
+    function createFloaty(type, symbol, target) {
+      const el = document.createElement('div');
+      el.className = type;
+      el.textContent = symbol;
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.fontSize = 1 + Math.random() * 2 + 'rem';
+      el.style.animationDuration = 3 + Math.random() * 3 + 's';
+      document.getElementById(target).appendChild(el);
+      setTimeout(() => el.remove(), 6000);
     }
+
+    setInterval(() => createFloaty('heart', '💗', 'hearts'), 400);
+    setInterval(() => createFloaty('sparkle', '🌸', 'sparkles'), 600);
+    setInterval(() => createFloaty('star', '🌼', 'stars'), 1000);
 
     function triggerConfetti() {
-      for (let i = 0; i < 100; i++) {
-        createSparkle();
-      }
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+      });
     }
 
-    function createSparkle() {
+    function createPopupSparkle() {
       const sparkle = document.createElement('div');
       sparkle.className = 'popup-sparkle';
       sparkle.textContent = '✨';
@@ -227,23 +348,27 @@
       setTimeout(() => sparkle.remove(), 3000);
     }
 
-    setInterval(() => {
-      createFloaty('❤️', 'hearts');
-      createFloaty('✨', 'sparkles');
-      createFloaty('🌸', 'stars');
-    }, 1000);
+    const popupObserver = new MutationObserver((mutations) => {
+      mutations.forEach(mutation => {
+        if (mutation.type === 'attributes' && mutation.target.classList.contains('show')) {
+          const sparkleInterval = setInterval(createPopupSparkle, 300);
+          setTimeout(() => clearInterval(sparkleInterval), 3000);
+        }
+      });
+    });
 
-    function createFloaty(symbol, targetId) {
-      const el = document.createElement('div');
-      el.textContent = symbol;
-      el.style.position = 'absolute';
-      el.style.left = Math.random() * 100 + 'vw';
-      el.style.top = '100vh';
-      el.style.fontSize = 1 + Math.random() * 2 + 'rem';
-      el.style.animation = 'float 6s linear forwards';
-      document.getElementById(targetId).appendChild(el);
-      setTimeout(() => el.remove(), 6000);
+    popupObserver.observe(document.querySelector('.popup'), { attributes: true });
+
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark-mode');
     }
+
+    window.addEventListener('click', () => {
+      const bgAudio = document.querySelector('audio[autoplay]');
+      if (bgAudio) bgAudio.play().catch(e => console.log('Audio blocked:', e));
+    }, { once: true });
+
+    updateSectionVisibility();
   </script>
 </body>
 </html>
